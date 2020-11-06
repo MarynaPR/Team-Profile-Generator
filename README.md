@@ -110,3 +110,46 @@ You are required to submit the following for review:
 
 - - -
 © 2020 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.
+
+///////////
+# Team-Profile-Generator
+
+
+![Screenshot](images/Screenshot.....png)
+
+
+ ## Description
+
+ This application showcases 
+ a basic profile for Team
+
+ ...
+ provides step by step guide on how to create a well-crafted GitHub Readme.md file. It was created using Node.js featuring the use of 'fs' module to  to enhance code readability and reusability, Promises to handle asynchronous functionality in a cleaner fashion and 'npm init' command to create Node.js packages that are dependent on outside tools and libraries such as Inquirer.
+
+ ## Technology Used
+
+ * HTML
+ * Node.js
+ * CSS
+
+ ## Resources Udes for Research
+
+ * https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md
+ * http://jbt.github.io/markdown-editor/
+ * https://shields.io/
+ * https://www.contributor-covenant.org/
+ * https://choosealicense.com/
+ * https://github.com/microsoft/vscode
+ * https://github.com/github/docs/blob/main/CONTRIBUTING.md
+ * https://github.com/github/docs/blob/main/CODE_OF_CONDUCT.md
+
+ ## Web Access
+
+ Click here for the [Team-Profile-Generator] access https://marynapr.github.io/Team-Profile-Generator/
+
+ ## Link to the video
+ To see the video testing the functionality of Team-Profile-Generator please visit the following link
+
+ [video](https://)
+
+This document was created by MarynaPR. Feel free to contact me with any questions via email pryadkamaryna@gmail.com.
