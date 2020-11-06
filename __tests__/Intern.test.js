@@ -1,3 +1,7 @@
+// In addition to `Employee`'s properties and methods, `Intern` will also have:
+// * `school`
+// * `getSchool()`
+// * `getRole()`   // Overridden to return 'Intern'
 const Employee = require('../lib/Employee.js');
 const Intern = require('../lib/Intern.js');
 
