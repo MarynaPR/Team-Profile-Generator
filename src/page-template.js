@@ -1,4 +1,4 @@
-// create the about section
+// create the about MY Team section
 const generateAbout = aboutText => {
   if (!aboutText) {
     return '';
@@ -13,12 +13,12 @@ const generateAbout = aboutText => {
 };
 
 // create the projects section
-const generateProjects = projectsArr => {
+function generateTeam(data) {
   return `
     <section class="my-3" id="portfolio">
       <h2 class="text-dark bg-primary p-2 display-inline-block">Work</h2>
       <div class="flex-row justify-space-between">
-      ${projectsArr
+      ${data
       .filter(({ feature }) => feature)
       .map(({ name, description, languages, link }) => {
         return `
@@ -35,7 +35,7 @@ const generateProjects = projectsArr => {
       })
       .join('')}
 
-      ${projectsArr
+      ${data
       .filter(({ feature }) => !feature)
       .map(({ name, description, languages, link }) => {
         console.log(languages);
@@ -88,7 +88,7 @@ module.exports = templateData => {
     </header>
     <main class="container my-5">
       ${generateAbout(about)}
-      ${generateProjects(projects)}
+      ${generateTeam(data)}
     </main>
     <footer class="container text-center py-3">
       <h3 class="text-dark">&copy;2020 by ${header.name}</h3>
