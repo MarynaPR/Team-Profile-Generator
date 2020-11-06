@@ -1,4 +1,4 @@
-// const inquirer = require('inquirer');
+const inquirer = require('inquirer');
 // const generatePage = require('./src/page-template');
 // //const{writeFile,copyFile} =require ()
 // const promptAbout = () => {
