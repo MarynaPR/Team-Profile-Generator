@@ -19,20 +19,20 @@ Add a New Team Member
             {
                 type: "list",
                 name: "employee",
-                message: "What do you want to add to the page?",
+                message: "Who do you want to add to the page?",
                 choices: ["Manager", "Engineer", "Intern", "Employee"]
 
             },
             {
                 type: "input",
                 name: "name",
-                message: "Enter your team manager's name? (Required)",
+                message: "Enter manager's name. (Required)",
                 when: (answers) => answers.employee == "Manager",
                 validate: nameInput => {
                     if (nameInput) {
                         return true;
                     } else {
-                        console.log("You need to enter your team manager's name!");
+                        console.log("You need to enter manager's name!");
                         return false;
                     }
                 }
@@ -40,13 +40,13 @@ Add a New Team Member
             {
                 type: "input",
                 name: "id",
-                message: "Enter your team manager's employee ID (Required)",
+                message: "Enter manager's employee ID. (Required)",
                 when: (answers) => answers.employee == "Manager",
                 validate: idInput => {
                     if (idInput) {
                         return true;
                     } else {
-                        console.log('You need to enter emoloyee ID!');
+                        console.log("You need to enter manager's emoloyee ID!");
                         return false;
                     }
                 }
@@ -54,13 +54,13 @@ Add a New Team Member
             {
                 type: "input",
                 name: "email",
-                message: "Enter your team manager's email address? (Required)",
+                message: "Enter manager's email address. (Required)",
                 when: (answers) => answers.employee == "Manager",
                 validate: emailInput => {
                     if (emailInput) {
                         return true;
                     } else {
-                        console.log("You need to enter your team manager's email address!");
+                        console.log("You need to enter manager's email address!");
                         return false;
                     }
                 }
@@ -68,13 +68,13 @@ Add a New Team Member
             {
                 type: "input",
                 name: "office",
-                message: "Enter your team manager's office number? (Required)",
+                message: "Enter manager's office number. (Required)",
                 when: (answers) => answers.employee == "Manager",
                 validate: officeInput => {
                     if (officeInput) {
                         return true;
                     } else {
-                        console.log("You need to enter your team manager's office number!");
+                        console.log("You need to enter manager's office number!");
                         return false;
                     }
                 }
@@ -89,14 +89,14 @@ Add a New Team Member
             {
                 type: "input",
                 name: "name",
-                message: "Enter your engineer's name? (Required)",
+                message: "Enter engineer's name. (Required)",
 
                 when: (answers) => answers.employee == "Engineer",
                 validate: engineerNameInput => {
                     if (engineerNameInput) {
                         return true;
                     } else {
-                        console.log("You need to enter your engineer's name!");
+                        console.log("You need to enter engineer's name!");
                         return false;
                     }
                 }
@@ -118,10 +118,10 @@ Add a New Team Member
             {
                 type: "input",
                 name: "email",
-                message: "Enter your engineer's email address? (Required)",
+                message: "Enter engineer's email address. (Required)",
                 when: (answers) => answers.employee == "Engineer",
-                validate: emailInput => {
-                    if (emailInput) {
+                validate: engineerEmailInput => {
+                    if (engineerEmailInput) {
                         return true;
                     } else {
                         console.log("You need to enter your engineer's email address!");
@@ -133,13 +133,13 @@ Add a New Team Member
             {
                 type: 'input',
                 name: 'github',
-                message: 'Enter your GitHub Username (Required)',
+                message: "Enter engineer's GitHub Username. (Required)",
                 when: (answers) => answers.employee == "Engineer",
-                validate: githubInput => {
-                    if (githubInput) {
+                validate: engineerGithubInput => {
+                    if (engineerGithubInput) {
                         return true;
                     } else {
-                        console.log('Please enter your GitHub username!');
+                        console.log('Please enter GitHub username!');
                         return false;
                     }
                 }
@@ -148,13 +148,13 @@ Add a New Team Member
             {
                 type: "input",
                 name: "name",
-                message: "Enter your name (Required)",
+                message: "Enter inter's name. (Required)",
                 when: (answers) => answers.employee == "Intern",
-                validate: nameInput => {
-                    if (nameInput) {
+                validate: internNameInput => {
+                    if (internNameInput) {
                         return true;
                     } else {
-                        console.log("You need to enter your name!");
+                        console.log("You need to enter intern's name!");
                         return false;
                     }
                 }
@@ -162,13 +162,13 @@ Add a New Team Member
             {
                 type: "input",
                 name: "id",
-                message: "Enter your employee ID (Required)",
+                message: "Enter intern's employee ID. (Required)",
                 when: (answers) => answers.employee == "Intern",
-                validate: idInput => {
-                    if (idInput) {
+                validate: internIdInput => {
+                    if (internIdInput) {
                         return true;
                     } else {
-                        console.log('You need to enter emoloyee ID!');
+                        console.log("You need to enter intern's emoloyee ID!");
                         return false;
                     }
                 }
@@ -176,13 +176,13 @@ Add a New Team Member
             {
                 type: "input",
                 name: "email",
-                message: "Enter your email address? (Required)",
+                message: "Enter intern's email address? (Required)",
                 when: (answers) => answers.employee == "Intern",
-                validate: emailInput => {
-                    if (emailInput) {
+                validate: internEmailInput => {
+                    if (internEmailInput) {
                         return true;
                     } else {
-                        console.log("You need to enter your email address!");
+                        console.log("You need to enter entern's email address!");
                         return false;
                     }
                 }
@@ -190,13 +190,13 @@ Add a New Team Member
             {
                 type: "input",
                 name: "school",
-                message: "Enter the school name? (Required)",
+                message: "Enter intern's school name? (Required)",
                 when: (answers) => answers.employee == "Intern",
-                validate: emailInput => {
-                    if (emailInput) {
+                validate: schoolInput => {
+                    if (schoolInput) {
                         return true;
                     } else {
-                        console.log("You need to enter your school name!");
+                        console.log("You need to enter intern's school name!");
                         return false;
                     }
                 }
@@ -217,7 +217,7 @@ const start = async (data = []) => {
     console.log(`This is the data: ${data}`)
 
     if (result.employee == "Manager") {
-        data.push(new Manager(result.name, result.id, result.email, result.officeNumber))
+        data.push(new Manager(result.name, result.id, result.email, result.office))
     }
     if (result.employee == "Engineer") {
         data.push(new Engineer(result.name, result.id, result.email, result.github))
