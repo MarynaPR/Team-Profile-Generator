@@ -1,8 +1,9 @@
 const inquirer = require('inquirer');
-const { generatePage } = require('./src/page-template.js');
+const Manager = require('./lib/Manager');
+const page = require("./src/page-template")
 const { writeFile } = require('./write-file.js');
 
-const promptResponse = data => {
+const promptResponse = async data => {
     console.log(`
 ======================
 Add a New Team Member
@@ -12,7 +13,7 @@ Add a New Team Member
     if (!data) {
         data = [];
     }
-    return inquirer
+    let result = await inquirer
         .prompt([
             {
                 type: "list",
@@ -84,24 +85,12 @@ Add a New Team Member
                 message: 'Would you like to feature this employee?',
                 default: false
             },
-            {
-                type: 'checkbox',
-                name: 'employees',
-                message: "Please select from the following menu the employee you'd like to add next:",
-                choices: ["Add an engineer", "Add an intern", "Finish building my team"]
-            },
-            {
-                type: 'confirm',
-                name: 'confirmAddEmployee',
-                message: 'Would you like to enter another employee?',
-                default: false
-            },
-
             //engineer
             {
                 type: "input",
                 name: "name",
                 message: "Enter your engineer's name? (Required)",
+
                 when: (answers) => answers.employee == "Engineer",
                 validate: engineerNameInput => {
                     if (engineerNameInput) {
@@ -116,6 +105,7 @@ Add a New Team Member
                 type: "input",
                 name: "engineerId",
                 message: "Enter your engineer's employee ID (Required)",
+                when: (answers) => answers.employee == "Engineer",
                 validate: engineerIdInput => {
                     if (engineerIdInput) {
                         return true;
@@ -129,6 +119,7 @@ Add a New Team Member
                 type: "input",
                 name: "email",
                 message: "Enter your engineer's email address? (Required)",
+                when: (answers) => answers.employee == "Engineer",
                 validate: emailInput => {
                     if (emailInput) {
                         return true;
@@ -143,6 +134,7 @@ Add a New Team Member
                 type: 'input',
                 name: 'github',
                 message: 'Enter your GitHub Username (Required)',
+                when: (answers) => answers.employee == "Engineer",
                 validate: githubInput => {
                     if (githubInput) {
                         return true;
@@ -158,6 +150,7 @@ Add a New Team Member
                 type: "input",
                 name: "name",
                 message: "Enter your name (Required)",
+                when: (answers) => answers.employee == "Intern",
                 validate: nameInput => {
                     if (nameInput) {
                         return true;
@@ -171,6 +164,7 @@ Add a New Team Member
                 type: "input",
                 name: "id",
                 message: "Enter your employee ID (Required)",
+                when: (answers) => answers.employee == "Intern",
                 validate: idInput => {
                     if (idInput) {
                         return true;
@@ -184,6 +178,7 @@ Add a New Team Member
                 type: "input",
                 name: "email",
                 message: "Enter your email address? (Required)",
+                when: (answers) => answers.employee == "Intern",
                 validate: emailInput => {
                     if (emailInput) {
                         return true;
@@ -197,6 +192,7 @@ Add a New Team Member
                 type: "input",
                 name: "school",
                 message: "Enter the school name? (Required)",
+                when: (answers) => answers.employee == "Intern",
                 validate: emailInput => {
                     if (emailInput) {
                         return true;
@@ -206,35 +202,33 @@ Add a New Team Member
                     }
                 }
             },
-            //finish building my team
             {
                 type: 'confirm',
-                name: 'finish',
-                message: 'Would you like to finish building your team?',
+                name: 'confirmAddEmployee',
+                message: 'Would you like to enter another employee?',
                 default: false
             },
         ])
-    // .then(data => {
-    //     teamData.data.push(data);
-    //     if (data.confirmFinish) {
-    //         return promptResponse(data);
-    //     } else {
-    //         return data;
-    //     }
-    // });
+    return result
 };
 
-promptResponse()
-    .then(data => {
-        return generatePage(data)
-    })
-    .then(pageHTML => {
-        return writeFile(pageHTML);
-    })
-    .then(writeFileData => {
-        console.log(writeFileData);
-        return;
-    })
-    .catch(err => {
-        console.log(err);
-    });
+const start = async (data = []) => {
+    let result = await promptResponse()
+    data.push(result)
+    console.log(`This is the data: ${data}`)
+    if (result.employee == "Manager") {
+        data.push(new Manager(result.name, result.id, result.email, result.officeInput))
+    }
+
+    if (result.confirmAddEmployee) {
+        // Check the answer to the result and make a class out of the answers.
+        start(data)
+    } else {
+        console.log(data)
+        let page_data = page.generate(data)
+        writeFile(page_data)
+    }
+}
+
+
+start()

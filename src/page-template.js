@@ -48,11 +48,13 @@ function generateTeam(data) {
 };
 
 // export function to generate entire page
-module.exports = templateData => {
-  // destructure page data by section
-  const { projects, about, ...header } = templateData;
+module.exports = {
+  generate: (templateData) => {
+    console.log("PAGE")
+    // destructure page data by section
+    //const { projects, about, ...header } = templateData;
 
-  return `
+    return `
   <!DOCTYPE html>
   <html lang="en">
   
@@ -69,20 +71,21 @@ module.exports = templateData => {
   <body>
     <header>
       <div class="container flex-row justify-space-between align-center py-3">
-        <h1 class="page-title text-secondary bg-dark py-2 px-3">${header.name}</h1>
+        <h1 class="page-title text-secondary bg-dark py-2 px-3">MY TEAM</h1>
         <nav class="flex-row">
-          <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="https://github.com/${header.github}">GitHub</a>
+          <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="https://github.com">GitHub</a>
         </nav>
       </div>
     </header>
     <main class="container my-5">
-      ${generateAbout(about)}
-      ${generateTeam(data)}
+      ${JSON.stringify(templateData)}
+      ${templateData.forEach((e) => `<p>${templateData}`)}
     </main>
     <footer class="container text-center py-3">
-      <h3 class="text-dark">&copy;2020 by ${header.name}</h3>
+      <h3 class="text-dark">&copy;2020 by Maryna Pryadka</h3>
     </footer>
   </body>
   </html>
-  `;
-};
+  `
+  }
+}
