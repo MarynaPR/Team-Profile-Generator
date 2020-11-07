@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const page = require("./src/page-template")
 const { writeFile } = require('./write-file.js');
@@ -78,7 +79,6 @@ Add a New Team Member
                     }
                 }
             },
-
             {
                 type: 'confirm',
                 name: 'feature',
@@ -144,7 +144,6 @@ Add a New Team Member
                     }
                 }
             },
-
             //intern
             {
                 type: "input",
@@ -216,10 +215,19 @@ const start = async (data = []) => {
     let result = await promptResponse()
     data.push(result)
     console.log(`This is the data: ${data}`)
-    if (result.employee == "Manager") {
-        data.push(new Manager(result.name, result.id, result.email, result.officeInput))
-    }
 
+    if (result.employee == "Manager") {
+        data.push(new Manager(result.name, result.id, result.email, result.officeNumber))
+    }
+    if (result.employee == "Engineer") {
+        data.push(new Engineer(result.name, result.id, result.email, result.github))
+    }
+    if (result.employee == "Intern") {
+        data.push(new Intern(result.name, result.id, result.email, result.school))
+    }
+    if (result.employee == "Employee") {
+        data.push(new Employee(result.name, result.id, result.email))
+    }
     if (result.confirmAddEmployee) {
         // Check the answer to the result and make a class out of the answers.
         start(data)
@@ -229,6 +237,5 @@ const start = async (data = []) => {
         writeFile(page_data)
     }
 }
-
 
 start()
