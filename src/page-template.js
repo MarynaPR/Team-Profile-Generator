@@ -1,60 +1,48 @@
 // create the about MY Team section
+const Employee = require('../lib/Employee');
+const Manager = require('../lib/Manager');
+const Intern = require('../lib/Intern');
+const Engineer = require('../lib/Engineer');
 
 
-// create the projects section
-function generatePage(employee) {
-  return "bob"
-  //`
-  //     <section class="my-3" id="portfolio">
-  //       <h2 class="text-dark bg-primary p-2 display-inline-block">Work</h2>
-  //       <div class="flex-row justify-space-between">
-  //       ${employee
-  //       .filter(({ employee => employee.getRole() === 'Manager')
-  //         .map(({ name, id, email, officeNumber }) => {
-  //           return `
-  //           <div class="col-12 mb-2 bg-dark text-light p-3">
-  //             <h3 class="portfolio-item-title text-light">${name}</h3>
-  //             <h5 class="portfolio-languages">
-  //               Built With:
-  //               ${languages.map(language => language).join(',')}
-  //             </h5>
-  //             <p>${description}</p>
-  //             <a href="${link}" class="btn"><i class="fab fa-github mr-2"></i>View Project on GitHub</a>
-  //           </div>
-  //         `;
-  //         })
-  //         .join('')}
-
-  //       ${data
-  //       .filter(({ employee }) => !employee)
-  //       .map(({ name, id, email }) => {
-  //         console.log('EMPLOYEE');
-  //         return `
-  //           <div class="col-12 col-md-6 mb-2 bg-dark text-light p-3 flex-column">
-  //             <h3 class="portfolio-item-title text-light">${name}</h3>
-  //             <h5 class="portfolio-languages">
-  //               Built With:
-  //               ${languages.join(', ')}
-  //             </h5>
-  //             <p>${description}</p>
-  //             <a href="${link}" class="btn mt-auto"><i class="fab fa-github mr-2"></i>View Project on GitHub</a>
-  //           </div>
-  //         `;
-  //       })
-  //       .join('')}
-
-  //       </div>
-  //     </section>
-  //   `;
+function generateAllEmployees(dataArr) {
+  for (const data in dataArr) {
+    generateEmployees(data)
+  }
 };
+
+
+function generateEmployees(result) {
+  if (!result) {
+    if (result.role === 'Manager') {
+      const data = new Manager(result.name, result.id, result.email, result.officeNumber)
+      console.log(dataArr)
+      console.log(data)
+      return `
+  <div class="card employee-card">
+    <div class="card-header">
+      <h2 class="card-title">${data.setRole()}</h2>
+      <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${data.getRole()}</h3>
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        <li class="list-group-item">ID: ${data.getId()}</li>
+        <li class="list-group-item">Email: <a href="mailto:${data.getEmail()}}">${data.getEmail()}</a></li>
+        <li class="list-group-item">Office number: ${data.getOfficeNumber()}}</li>
+      </ul>
+    </div>
+  </div>
+  `
+    }
+  }
+}
+
 
 // export function to generate entire page
 module.exports = {
   generate: (templateData) => {
     console.log("PAGE")
-    // destructure page data by section
-    //const { projects, about, ...header } = templateData;
-
+    //const { Employee, Manager, Intern, Engineer } = templateData;
     return `
   <!DOCTYPE html>
   <html lang="en">
@@ -63,7 +51,7 @@ module.exports = {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Portfolio Demo</title>
+    <title>Team-Page-Generator</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -73,14 +61,14 @@ module.exports = {
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 jumbotron mb-3 team-heading">
-                <h1 class="text-center">My Team</h1>
+                <h2 class="text-center">My Team</h2>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row">
             <div class="team-area col-12 d-flex justify-content-center">
-                ${generatePage(templateData)}
+            ${generateAllEmployees(templateData)}
             </div>
         </div>
     </div>
@@ -95,6 +83,11 @@ module.exports = {
   }
 }
 
-
-      // ${JSON.stringify(templateData)}
-      // ${templateData.forEach((e) => `<p>${templateData}`)}
+// ${JSON.stringify(templateData)}
+//${templateData.forEach((e) => `<p>${templateData}`)}
+//${templateData.forEach((e) => "<p>${templateData}")}
+// ${generateEmployees(manager)}
+//
+//   ${generateAllEmployees(templateData)}
+//    ${JSON.stringify(templateData)}
+//${templateData.forEach((e) => `<p>${templateData}`)}

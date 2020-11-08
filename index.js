@@ -1,7 +1,9 @@
 const inquirer = require('inquirer');
 const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
-const page = require("./src/page-template")
+const Intern = require('./lib/Intern');
+const Engineer = require('./lib/Engineer');
+const page = require("./src/page-template");
 const { writeFile } = require('./write-file.js');
 
 const promptResponse = async data => {
@@ -229,11 +231,11 @@ const start = async (data = []) => {
         data.push(new Employee(result.name, result.id, result.email))
     }
     if (result.confirmAddEmployee) {
-        // Check the answer to the result and make a class out of the answers.
         start(data)
     } else {
         console.log(data)
         let page_data = page.generate(data)
+
         writeFile(page_data)
     }
 }
