@@ -213,31 +213,48 @@ Add a New Team Member
     return result
 };
 
-const start = async (data = []) => {
+const start = async (data = { manager: [], engineer: [], intern: [], employee: [] }) => {
     let result = await promptResponse()
-    data.push(result)
-    console.log(`This is the data: ${data}`)
+    // data.push(result)
+    // console.log(`This is the data: ${data}`)
+    data.manager.push(new Manager(result.name, result.id, result.email, result.office))
 
-    if (result.employee == "Manager") {
-        data.push(new Manager(result.name, result.id, result.email, result.office))
-    }
-    if (result.employee == "Engineer") {
-        data.push(new Engineer(result.name, result.id, result.email, result.github))
-    }
-    if (result.employee == "Intern") {
-        data.push(new Intern(result.name, result.id, result.email, result.school))
-    }
-    if (result.employee == "Employee") {
-        data.push(new Employee(result.name, result.id, result.email))
-    }
+    // if (result.employee == "Manager") {
+    //     data.push(new Manager(result.name, result.id, result.email, result.office))
+    // }
+    // if (result.employee == "Engineer") {
+    //     data.push(new Engineer(result.name, result.id, result.email, result.github))
+    // }
+    // if (result.employee == "Intern") {
+    //     data.push(new Intern(result.name, result.id, result.email, result.school))
+    // }
+    // if (result.employee == "Employee") {
+    //     data.push(new Employee(result.name, result.id, result.email))
+    // }
+    //const data = { manager: [], engineer: [], intern: [], employee: [] }
+
+
     if (result.confirmAddEmployee) {
         start(data)
     } else {
         console.log(data)
         let page_data = page.generate(data)
-
         writeFile(page_data)
     }
 }
 
 start()
+
+// Start the prompt
+// If the user selects Manager
+// Once all the data for manager is valid and available
+// Do data.manager.push(new Manager(managerDetails))
+// So once all the employees are entered in the prompt
+// pass it to page.generate(data)
+//const data = {manager: [], engineer: [], intern: [], employee: []} for easy access in page-template.js
+
+
+
+
+
+
