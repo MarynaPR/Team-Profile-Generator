@@ -10,7 +10,7 @@ const writeFile = fileContent => {
             }
             resolve({
                 ok: true,
-                message: 'html.js created!'
+                message: 'html is created!'
             });
         });
     });

@@ -90,7 +90,7 @@ Add a New Team Member
             //engineer
             {
                 type: "input",
-                name: "name",
+                name: "engineerName",
                 message: "Enter engineer's name. (Required)",
 
                 when: (answers) => answers.employee == "Engineer",
@@ -119,7 +119,7 @@ Add a New Team Member
             },
             {
                 type: "input",
-                name: "email",
+                name: "engineerEmail",
                 message: "Enter engineer's email address. (Required)",
                 when: (answers) => answers.employee == "Engineer",
                 validate: engineerEmailInput => {
@@ -149,7 +149,7 @@ Add a New Team Member
             //intern
             {
                 type: "input",
-                name: "name",
+                name: "internName",
                 message: "Enter inter's name. (Required)",
                 when: (answers) => answers.employee == "Intern",
                 validate: internNameInput => {
@@ -163,7 +163,7 @@ Add a New Team Member
             },
             {
                 type: "input",
-                name: "id",
+                name: "internId",
                 message: "Enter intern's employee ID. (Required)",
                 when: (answers) => answers.employee == "Intern",
                 validate: internIdInput => {
@@ -177,7 +177,7 @@ Add a New Team Member
             },
             {
                 type: "input",
-                name: "email",
+                name: "internEmail",
                 message: "Enter intern's email address? (Required)",
                 when: (answers) => answers.employee == "Intern",
                 validate: internEmailInput => {
@@ -210,15 +210,22 @@ Add a New Team Member
                 default: false
             },
         ])
-    return result
+    return [result]
 };
 
 const start = async (data = { manager: [], engineer: [], intern: [], employee: [] }) => {
     let result = await promptResponse()
+    console.log("line 218" + JSON.stringify(result))
+    const managers = result.filter(employee => employee.employee === 'Manager')
+    data.manager = data.manager.concat(managers)
+
     // data.push(result)
     // console.log(`This is the data: ${data}`)
-    data.manager.push(new Manager(result.name, result.id, result.email, result.office))
-
+    // data.manager.push(new Manager(managerDetails))
+    // data.manager.push(new Manager(result.name, result.id, result.email, result.office))
+    // data.engineer.push(new Engineer(result.engineerName, result.engineerId, result.engineerEmail, result.github))
+    // data.intern.push(new Intern(result.internName, result.internId, result.internEmail, result.school))
+    //data.employee.push(new Employee(result.name, result.id, result.email))
     // if (result.employee == "Manager") {
     //     data.push(new Manager(result.name, result.id, result.email, result.office))
     // }
@@ -231,8 +238,6 @@ const start = async (data = { manager: [], engineer: [], intern: [], employee: [
     // if (result.employee == "Employee") {
     //     data.push(new Employee(result.name, result.id, result.email))
     // }
-    //const data = { manager: [], engineer: [], intern: [], employee: [] }
-
 
     if (result.confirmAddEmployee) {
         start(data)
@@ -242,17 +247,7 @@ const start = async (data = { manager: [], engineer: [], intern: [], employee: [
         writeFile(page_data)
     }
 }
-
 start()
-
-// Start the prompt
-// If the user selects Manager
-// Once all the data for manager is valid and available
-// Do data.manager.push(new Manager(managerDetails))
-// So once all the employees are entered in the prompt
-// pass it to page.generate(data)
-//const data = {manager: [], engineer: [], intern: [], employee: []} for easy access in page-template.js
-
 
 
 
