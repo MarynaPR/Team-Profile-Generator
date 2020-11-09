@@ -1,3 +1,8 @@
+// //const Employee = require('./lib/Employee');
+// const Manager = require('./lib/Manager');
+// const Intern = require('./lib/Intern');
+// const Engineer = require('./lib/Engineer');
+//const { writeFile } = require('./write-file.js');
 
 function generateTeam(data) {
   console.log(data)
@@ -6,7 +11,7 @@ function generateTeam(data) {
           <h2 class="text-dark bg-primary p-2 display-inline-block">Employees</h2>
           <div class="flex-row justify-space-between">
           ${data
-      .filter(({ manager }) => manager)
+      .filter(({ employee }) => employee.getRole() === 'Manager')
       .map(({ managerName, managerId, managerEmail, officeNumber }) => {
         return `
               <div class="col-12 mb-2 bg-dark text-light p-3">
@@ -45,7 +50,7 @@ function generateTeam(data) {
 
 // export function to generate entire page
 module.exports = templateData => {
-  //console.log("PAGE")
+  console.log("PAGE")
 
   // const { manager, intern, engineer } = templateData;
 

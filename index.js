@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
-//const Employee = require('./lib/Employee');
+//const fs = require('fs');
+const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 const Engineer = require('./lib/Engineer');
@@ -8,124 +9,96 @@ const { writeFile } = require('./write-file.js');
 
 const employeeIdArr = [];
 const teamArr = [];
-const promptResponse = data => {
-
-
+function getManager() {
+    //promptResponse() {
     console.log(`
-======================
-Add a New Team Member
-======================
+===============================
+Add a New Team Member - Manager
+===============================
 `);
-    // // If there's no 'projects' array property, create one
-    // if (!data) {
-    //     data = [];
-    // }
-    // return
-    function getManager() {
-
-        inquirer.prompt([
-
-            {
-                type: "input",
-                name: "managerName",
-                message: "Enter manager's name. (Required)",
-                when: (answers) => answers.employee == "Manager",
-                validate: managerNameInput => {
-                    if (managerNameInput) {
-                        return true;
-                    } else {
-                        console.log("You need to enter manager's name!");
-                        return false;
-                    }
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "managerName",
+            message: "Enter manager's name. (Required)",
+            when: (answers) => answers.employee == "Manager",
+            validate: managerNameInput => {
+                if (managerNameInput) {
+                    return true;
+                } else {
+                    console.log("You need to enter manager's name!");
+                    return false;
                 }
-            },
-            {
-                type: "input",
-                name: "managerId",
-                message: "Enter manager's employee ID. (Required)",
-                when: (answers) => answers.employee == "Manager",
-                validate: managerIdInput => {
-                    if (managerIdInput) {
-                        return true;
-                    } else {
-                        console.log("You need to enter manager's emoloyee ID!");
-                        return false;
-                    }
-                }
-            },
-            {
-                type: "input",
-                name: "managerEmail",
-                message: "Enter manager's email address. (Required)",
-                when: (answers) => answers.employee == "Manager",
-                validate: managerEmailInput => {
-                    if (managerEmailInput) {
-                        return true;
-                    } else {
-                        console.log("You need to enter manager's email address!");
-                        return false;
-                    }
-                }
-            },
-            {
-                type: "input",
-                name: "managerofficeNumber",
-                message: "Enter manager's office number. (Required)",
-                when: (answers) => answers.employee == "Manager",
-                validate: officeNumberInput => {
-                    if (officeNumberInput) {
-                        return true;
-                    } else {
-                        console.log("You need to enter manager's office number!");
-                        return false;
-                    }
-                }
-            },
-            {
-                type: 'confirm',
-                name: 'feature',
-                message: 'Would you like to feature this employee?',
-                default: false
             }
-        ]).then(answers => {
-            const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.officeNumber);
-            teamArr.push(manager);
-            employeeIdArr.push(answers.managerId);
-            getTeam();
-
-        });
-    }
-    function getTeam() {
-        inquirer.prompt([
-            {
-                type: "list",
-                name: "employee",
-                message: "Who do you want to add to the page?",
-                choices: ["Manager", "Engineer", "Intern", "I do not have any new employee to add"]
-            }
-        ]).then(
-            choice => {
-                switch (choice.memberChoice) {
-                    case "Engineer":
-                        getEngineer();
-                        break;
-                    case "Intern":
-                        getIntern();
-                        break;
-                    default:
-                        getMembers();
+        },
+        {
+            type: "input",
+            name: "managerId",
+            message: "Enter manager's employee ID. (Required)",
+            when: (answers) => answers.employee == "Manager",
+            validate: managerIdInput => {
+                if (managerIdInput) {
+                    return true;
+                } else {
+                    console.log("You need to enter manager's emoloyee ID!");
+                    return false;
                 }
-            });
-    }
+            }
+        },
+        {
+            type: "input",
+            name: "managerEmail",
+            message: "Enter manager's email address. (Required)",
+            when: (answers) => answers.employee == "Manager",
+            validate: managerEmailInput => {
+                if (managerEmailInput) {
+                    return true;
+                } else {
+                    console.log("You need to enter manager's email address!");
+                    return false;
+                }
+            }
+        },
+        {
+            type: "input",
+            name: "managerofficeNumber",
+            message: "Enter manager's office number. (Required)",
+            when: (answers) => answers.employee == "Manager",
+            validate: officeNumberInput => {
+                if (officeNumberInput) {
+                    return true;
+                } else {
+                    console.log("You need to enter manager's office number!");
+                    return false;
+                }
+            }
+        },
+        // {
+        //     type: 'confirm',
+        //     name: 'feature',
+        //     message: 'Would you like to feature this employee?',
+        //     default: false
+        // }
+    ]).then(answers => {
+        const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.officeNumber);
+        teamArr.push(manager);
+        employeeIdArr.push(answers.managerId);
+        getTeam()
+    })
+
 
     //engineer
     function getEngineer() {
+        console.log(`
+    =================================
+    Add a New Team Member - Engineer
+    =================================
+    `);
         inquirer.prompt([
             {
                 type: "input",
                 name: "engineerName",
                 message: "Enter engineer's name. (Required)",
-
                 when: (answers) => answers.employee == "Engineer",
                 validate: engineerNameInput => {
                     if (engineerNameInput) {
@@ -178,22 +151,27 @@ Add a New Team Member
                     }
                 }
             },
-            {
-                type: 'confirm',
-                name: 'feature',
-                message: 'Would you like to feature this employee?',
-                default: false
-            }
+            // {
+            //     type: 'confirm',
+            //     name: 'feature',
+            //     message: 'Would you like to feature this employee?',
+            //     default: false
+            // }
         ]).then(answers => {
             const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.github);
             teamArr.push(engineer);
             employeeIdArr.push(answers.engineerId);
-            getTeam();
-        });
+            getTeam()
+        })
     }
 
     //intern
     function getIntern() {
+        console.log(`
+    ===============================
+    Add a New Team Member - Intern
+    ===============================
+    `);
         inquirer.prompt([
             {
                 type: "input",
@@ -251,12 +229,12 @@ Add a New Team Member
                     }
                 }
             },
-            {
-                type: 'confirm',
-                name: 'feature',
-                message: 'Would you like to feature this employee?',
-                default: false
-            }
+            // {
+            //     type: 'confirm',
+            //     name: 'feature',
+            //     message: 'Would you like to feature this employee?',
+            //     default: false
+            // }
         ]).then(answers => {
             const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.school);
             teamArr.push(intern);
@@ -264,8 +242,41 @@ Add a New Team Member
             getTeam();
         });
     }
+    //start the prompt questions
+    function getTeam() {
+        console.log(`
+    ============
+      New Team 
+    ============
+    `);
+        inquirer.prompt([
+            {
+                type: "list",
+                name: "employee",
+                message: "Enter your next employee.",
+                choices: ["Manager", "Engineer", "Intern", "I do not have any new employee to add. Finish project."]
+            }
+        ]).then(answers => {
+            switch (answers.employee) {
+                case "Engineer":
+                    getEngineer();
+                    break;
+                case "Intern":
+                    getIntern();
+                    break;
+                case "Finish":
+                    const fileContent = generatePage(teamArr);
+                    writeFile(fileContent);
+                    console.log('html');
 
+            }
+        })
+    }
 }
+getManager();
+
+
+
 // type: 'confirm',
 //     name: 'confirmAddEmployee',
 //         message: 'Would you like to enter another employee?',
@@ -296,12 +307,30 @@ Add a New Team Member
 //     })
 //     .catch(err => {
 //         console.log(err);
-//     });
-const pageHTML = '';
 
-writeFile(pageHTML);
-//writeFileData();
-generatePage();
-getMembers();
-getManager();
-promptResponse();
+
+// // writing files
+// const writeFile = fileContent => {
+//     return new Promise((resolve, reject) => {
+//         fs.writeFile(fileContent, err => {
+//             if (err) {
+//                 reject(err);
+//                 return;
+//             }
+//             resolve({
+//                 ok: true,
+//                 message: 'html is created!'
+//             });
+//         });
+//     });
+// };
+
+
+// function getMembers() {
+//     inquirer.prompt('')
+//         .then((inquirerResponses) => {
+//             writeFile('./dist/index.html', generatePage({ ...inquirerResponses }))
+//         })
+// }
+
+//promptResponse();
