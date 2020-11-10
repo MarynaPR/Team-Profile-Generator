@@ -9,12 +9,11 @@ const { writeFile } = require('./write-file.js');
 
 const employeeIdArr = [];
 const teamArr = [];
-function getManager() {
-    //promptResponse() {
+function promptResponse() {
     console.log(`
-===============================
-Add a New Team Member - Manager
-===============================
+ ===============================
+ Add a New Team Member - Manager
+ ===============================
 `);
     inquirer.prompt([
         {
@@ -85,8 +84,6 @@ Add a New Team Member - Manager
         employeeIdArr.push(answers.managerId);
         getTeam()
     })
-
-
     //engineer
     function getEngineer() {
         console.log(`
@@ -163,8 +160,7 @@ Add a New Team Member - Manager
             employeeIdArr.push(answers.engineerId);
             getTeam()
         })
-    }
-
+    };
     //intern
     function getIntern() {
         console.log(`
@@ -266,14 +262,13 @@ Add a New Team Member - Manager
                     break;
                 case "Finish":
                     const fileContent = generatePage(teamArr);
-                    writeFile(fileContent);
+                    writeFile(fileContent)
                     console.log('html');
-
             }
         })
     }
 }
-getManager();
+promptResponse();
 
 
 
