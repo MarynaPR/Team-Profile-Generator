@@ -7,7 +7,7 @@ const Engineer = require('./lib/Engineer');
 const generatePage = require('./src/page-template');
 const { writeFile } = require('./write-file.js');
 
-const employeeIdArr = [];
+//const employeeIdArr = [];
 const teamArr = [];
 function promptResponse() {
     console.log(`
@@ -20,7 +20,7 @@ function promptResponse() {
             type: "input",
             name: "managerName",
             message: "Enter manager's name. (Required)",
-            when: (answers) => answers.employee == "Manager",
+            //when: (answers) => answers.employee == "Manager",
             validate: managerNameInput => {
                 if (managerNameInput) {
                     return true;
@@ -34,7 +34,7 @@ function promptResponse() {
             type: "input",
             name: "managerId",
             message: "Enter manager's employee ID. (Required)",
-            when: (answers) => answers.employee == "Manager",
+            // when: (answers) => answers.employee == "Manager",
             validate: managerIdInput => {
                 if (managerIdInput) {
                     return true;
@@ -48,7 +48,7 @@ function promptResponse() {
             type: "input",
             name: "managerEmail",
             message: "Enter manager's email address. (Required)",
-            when: (answers) => answers.employee == "Manager",
+            // when: (answers) => answers.employee == "Manager",
             validate: managerEmailInput => {
                 if (managerEmailInput) {
                     return true;
@@ -62,7 +62,7 @@ function promptResponse() {
             type: "input",
             name: "managerofficeNumber",
             message: "Enter manager's office number. (Required)",
-            when: (answers) => answers.employee == "Manager",
+            // when: (answers) => answers.employee == "Manager",
             validate: officeNumberInput => {
                 if (officeNumberInput) {
                     return true;
@@ -81,9 +81,11 @@ function promptResponse() {
     ]).then(answers => {
         const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.officeNumber);
         teamArr.push(manager);
-        employeeIdArr.push(answers.managerId);
+        // employeeIdArr.push(answers.managerId);
         getTeam()
     })
+
+
     //engineer
     function getEngineer() {
         console.log(`
@@ -96,7 +98,7 @@ function promptResponse() {
                 type: "input",
                 name: "engineerName",
                 message: "Enter engineer's name. (Required)",
-                when: (answers) => answers.employee == "Engineer",
+                //when: (answers) => answers.employee == "Engineer",
                 validate: engineerNameInput => {
                     if (engineerNameInput) {
                         return true;
@@ -110,7 +112,7 @@ function promptResponse() {
                 type: "input",
                 name: "engineerId",
                 message: "Enter your engineer's employee ID (Required)",
-                when: (answers) => answers.employee == "Engineer",
+                //when: (answers) => answers.employee == "Engineer",
                 validate: engineerIdInput => {
                     if (engineerIdInput) {
                         return true;
@@ -124,7 +126,7 @@ function promptResponse() {
                 type: "input",
                 name: "engineerEmail",
                 message: "Enter engineer's email address. (Required)",
-                when: (answers) => answers.employee == "Engineer",
+                //when: (answers) => answers.employee == "Engineer",
                 validate: engineerEmailInput => {
                     if (engineerEmailInput) {
                         return true;
@@ -138,7 +140,7 @@ function promptResponse() {
                 type: 'input',
                 name: 'github',
                 message: "Enter engineer's GitHub Username. (Required)",
-                when: (answers) => answers.employee == "Engineer",
+                //when: (answers) => answers.employee == "Engineer",
                 validate: engineerGithubInput => {
                     if (engineerGithubInput) {
                         return true;
@@ -157,7 +159,7 @@ function promptResponse() {
         ]).then(answers => {
             const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.github);
             teamArr.push(engineer);
-            employeeIdArr.push(answers.engineerId);
+            // employeeIdArr.push(answers.engineerId);
             getTeam()
         })
     };
@@ -173,7 +175,7 @@ function promptResponse() {
                 type: "input",
                 name: "internName",
                 message: "Enter inter's name. (Required)",
-                when: (answers) => answers.employee == "Intern",
+                //when: (answers) => answers.employee == "Intern",
                 validate: internNameInput => {
                     if (internNameInput) {
                         return true;
@@ -187,7 +189,7 @@ function promptResponse() {
                 type: "input",
                 name: "internId",
                 message: "Enter intern's employee ID. (Required)",
-                when: (answers) => answers.employee == "Intern",
+                // when: (answers) => answers.employee == "Intern",
                 validate: internIdInput => {
                     if (internIdInput) {
                         return true;
@@ -201,7 +203,7 @@ function promptResponse() {
                 type: "input",
                 name: "internEmail",
                 message: "Enter intern's email address? (Required)",
-                when: (answers) => answers.employee == "Intern",
+                // when: (answers) => answers.employee == "Intern",
                 validate: internEmailInput => {
                     if (internEmailInput) {
                         return true;
@@ -215,7 +217,7 @@ function promptResponse() {
                 type: "input",
                 name: "school",
                 message: "Enter intern's school name? (Required)",
-                when: (answers) => answers.employee == "Intern",
+                //when: (answers) => answers.employee == "Intern",
                 validate: schoolInput => {
                     if (schoolInput) {
                         return true;
@@ -234,7 +236,7 @@ function promptResponse() {
         ]).then(answers => {
             const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.school);
             teamArr.push(intern);
-            employeeIdArr.push(answers.internId);
+            //employeeIdArr.push(answers.internId);
             getTeam();
         });
     }
@@ -250,10 +252,14 @@ function promptResponse() {
                 type: "list",
                 name: "employee",
                 message: "Enter your next employee.",
-                choices: ["Manager", "Engineer", "Intern", "I do not have any new employee to add. Finish project."]
+                choices: ["Engineer", "Intern", "I do not have any new employee to add. Finish project."]
             }
         ]).then(answers => {
             switch (answers.employee) {
+                case "Manager":
+                    promptResponse();
+                    break;
+
                 case "Engineer":
                     getEngineer();
                     break;
@@ -268,7 +274,9 @@ function promptResponse() {
         })
     }
 }
+
 promptResponse();
+
 
 
 
