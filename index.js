@@ -1,12 +1,11 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { writeFile } = require('./write-file.js');
+const writeFile = require('./write-file.js');
 const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Intern = require('./lib/Intern');
 const Engineer = require('./lib/Engineer');
 const generatePage = require('./src/page-template');
-
 
 //const employeeIdArr = [];
 const teamArr = [];
@@ -15,76 +14,76 @@ function promptResponse() {
  ===============================
  Add a New Team Member - Manager
  ===============================
-`);
-    inquirer.prompt([
-        {
-            type: "input",
-            name: "managerName",
-            message: "Enter manager's name. (Required)",
-            //when: (answers) => answers.employee == "Manager",
-            validate: managerNameInput => {
-                if (managerNameInput) {
-                    return true;
-                } else {
-                    console.log("You need to enter manager's name!");
-                    return false;
+`); return inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "managerName",
+                message: "Enter manager's name. (Required)",
+                //when: (answers) => answers.employee == "Manager",
+                validate: managerNameInput => {
+                    if (managerNameInput) {
+                        return true;
+                    } else {
+                        console.log("You need to enter manager's name!");
+                        return false;
+                    }
                 }
-            }
-        },
-        {
-            type: "input",
-            name: "managerId",
-            message: "Enter manager's employee ID. (Required)",
-            // when: (answers) => answers.employee == "Manager",
-            validate: managerIdInput => {
-                if (managerIdInput) {
-                    return true;
-                } else {
-                    console.log("You need to enter manager's emoloyee ID!");
-                    return false;
+            },
+            {
+                type: "input",
+                name: "managerId",
+                message: "Enter manager's employee ID. (Required)",
+                // when: (answers) => answers.employee == "Manager",
+                validate: managerIdInput => {
+                    if (managerIdInput) {
+                        return true;
+                    } else {
+                        console.log("You need to enter manager's emoloyee ID!");
+                        return false;
+                    }
                 }
-            }
-        },
-        {
-            type: "input",
-            name: "managerEmail",
-            message: "Enter manager's email address. (Required)",
-            // when: (answers) => answers.employee == "Manager",
-            validate: managerEmailInput => {
-                if (managerEmailInput) {
-                    return true;
-                } else {
-                    console.log("You need to enter manager's email address!");
-                    return false;
+            },
+            {
+                type: "input",
+                name: "managerEmail",
+                message: "Enter manager's email address. (Required)",
+                // when: (answers) => answers.employee == "Manager",
+                validate: managerEmailInput => {
+                    if (managerEmailInput) {
+                        return true;
+                    } else {
+                        console.log("You need to enter manager's email address!");
+                        return false;
+                    }
                 }
-            }
-        },
-        {
-            type: "input",
-            name: "managerofficeNumber",
-            message: "Enter manager's office number. (Required)",
-            // when: (answers) => answers.employee == "Manager",
-            validate: officeNumberInput => {
-                if (officeNumberInput) {
-                    return true;
-                } else {
-                    console.log("You need to enter manager's office number!");
-                    return false;
+            },
+            {
+                type: "input",
+                name: "managerofficeNumber",
+                message: "Enter manager's office number. (Required)",
+                // when: (answers) => answers.employee == "Manager",
+                validate: officeNumberInput => {
+                    if (officeNumberInput) {
+                        return true;
+                    } else {
+                        console.log("You need to enter manager's office number!");
+                        return false;
+                    }
                 }
-            }
-        },
-        // {
-        //     type: 'confirm',
-        //     name: 'feature',
-        //     message: 'Would you like to feature this employee?',
-        //     default: false
-        // }
-    ]).then(answers => {
-        const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.officeNumber);
-        teamArr.push(manager);
-        // employeeIdArr.push(answers.managerId);
-        getTeam()
-    })
+            },
+            // {
+            //     type: 'confirm',
+            //     name: 'feature',
+            //     message: 'Would you like to feature this employee?',
+            //     default: false
+            // }
+        ]).then(answers => {
+            const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.officeNumber);
+            teamArr.push(manager);
+            // employeeIdArr.push(answers.managerId);
+            getTeam()
+        })
 
     //engineer
     function getEngineer() {
@@ -255,23 +254,20 @@ function promptResponse() {
                     type: "list",
                     name: "employee",
                     message: "Enter your next employee.",
-                    choices: ["Engineer", "Intern", "I do not have any new employee to add. Finish project."]
+                    choices: ["Engineer", "Intern", "Finish project"]
                 }
             ]).then(answers => {
                 switch (answers.employee) {
-                    // case "Manager":
-                    //     promptResponse();
-                    //     break;
                     case "Engineer":
                         getEngineer();
                         break;
                     case "Intern":
                         getIntern();
                         break;
-                    case "Finish":
+                    case "Finish project":
                         let fileContent = generatePage(teamArr);
                         writeFile(fileContent);
-                        console.log('html');
+                        console.log('HTML created');
                 }
             })
     }

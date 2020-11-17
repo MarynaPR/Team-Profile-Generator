@@ -1,5 +1,5 @@
 const fs = require('fs');
-
+console.log("loaded");
 // writing files
 const writeFile = fileContent => {
     return new Promise((resolve, reject) => {
@@ -15,6 +15,4 @@ const writeFile = fileContent => {
         });
     });
 };
-
-
-module.exports = { writeFile };
+module.exports = writeFile;

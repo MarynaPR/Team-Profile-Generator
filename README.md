@@ -10,8 +10,10 @@ The following image shows the generated HTML’s appearance and functionality.
  ## Technology Used
 
  * HTML
- * Node.js
  * CSS
+ * Node.js
+ * Inquirer 
+ * Jest
 
  ## Resources Udes for Research
 
