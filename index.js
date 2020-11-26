@@ -204,7 +204,6 @@ function promptResponse() {
             ]).then(answers => {
                 const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.school);
                 teamArr.push(intern);
-                //employeeIdArr.push(answers.internId);
                 getTeam();
             });
     }
