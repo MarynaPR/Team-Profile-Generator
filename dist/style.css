@@ -1,6 +1,9 @@
 .team-heading {
-    background-color: grey;
-    color: #ffffff;
+    color: white;
+}
+
+.jumbotron {
+    background-color:  #1e8ef0;
 }
 
 .team-area {
@@ -14,7 +17,7 @@
     max-width: 280px;
     width: 90%;
     min-height: 22rem;
-    background-color: #a52a2a;
+    background-color: #1e8ef0;
     color: white;
     display: flex;
     flex-direction: column;
@@ -23,14 +26,18 @@
     border: none;
 }
 
+.cart-title {
+    position: center;
+}
+
 .card-body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #f6f7f8ee;
+    background-color:rgba(155, 208, 247, 0.879);
 }
 
 .list-group-item {
-    color: grey-black;
+    color: black;
     text-decoration: none;
 }

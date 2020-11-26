@@ -56,7 +56,7 @@ function promptResponse() {
             },
             {
                 type: "input",
-                name: "managerofficeNumber",
+                name: "officeNumber",
                 message: "Enter manager's office number. (Required)",
                 validate: officeNumberInput => {
                     if (officeNumberInput) {

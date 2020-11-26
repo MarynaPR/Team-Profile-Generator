@@ -12,15 +12,15 @@ const generateTeam = employeeData => {
         return `
   <div class="card employee-card">
     <div class="card-header">
-        <h2 class="card-title">Name: ${name}</h2>
+        <h2 class="card-title"><i class="far fa-user-circle mr-2"></i> ${name}</h2>
         <h3 class="card-title"><i class="fas fa-glasses mr-2"></i>Manager</h3>
     </div>
 
     <div class="card-body">
         <ul class="list-group">
-            <li class="list-group-item">Id: ${id}</li>
-            <li class="list-group-item">Email: ${email}</a></li>
-            <li class="list-group-item">Office number: ${officeNumber}</li>
+            <li class="list-group-item"><i class="fas fa-fingerprint mr-2"></i>Id: ${id}</li>
+            <li class="list-group-item"><i class="fas fa-envelope mr-2"></i>Email: <a href="mailto:${email}}">${email}</a></li>
+            <li class="list-group-item"><i class="fas fa-address-book mr-2"></i>Office number: ${officeNumber}</li>
         </ul>
     </div>
   </div>
@@ -33,15 +33,15 @@ const generateTeam = employeeData => {
         return `
         <div class="card employee-card">
         <div class="card-header">
-            <h2 class="card-title">Name: ${name}</h2>
-            <h3 class="card-title"><i class="fas fa-glasses mr-2"></i>Engineer</h3>
+            <h2 class="card-title"><i class="far fa-user-circle mr-2"></i></i> ${name}</h2>
+            <h3 class="card-title"><i class="fas fa-brain mr-2"></i>Engineer</h3>
         </div>
     
         <div class="card-body">
             <ul class="list-group">
-                <li class="list-group-item">Id: ${id}</li>
-                <li class="list-group-item">Email: ${email}</a></li>
-                <li class="list-group-item",id="btn mt-auto"><i class="fab fa-github mr-2"></i>View Project on GitHub ${github}</li>
+                <li class="list-group-item"><i class="fas fa-fingerprint mr-2"></i>Id: ${id}</li>
+                <li class="list-group-item"><i class="fas fa-envelope mr-2"></i>Email: <a href="mailto:${email}}">${email}</a></li>
+                <li class="list-group-item",id="btn mt-auto"><i class="fab fa-github mr-2"></i>GitHub Account: <a href ="https://github.com/${github}" rel="noopener noreferrer">${github}</a></li>
             </ul>
         </div>
       </div>
@@ -51,19 +51,18 @@ const generateTeam = employeeData => {
     ${employeeData
       .filter(employee => employee.getRole() === "Intern")
       .map(({ name, id, email, school }) => {
-        // console.log(id);
         return `
         <div class="card employee-card">
         <div class="card-header">
-            <h2 class="card-title">Name: ${name}</h2>
-            <h3 class="card-title"><i class="fas fa-glasses mr-2"></i>Intern</h3>
+            <h2 class="card-title"><i class="far fa-user-circle mr-2"></i> ${name}</h2>
+            <h3 class="card-title"><i class="far fa-clipboard mr-2"></i>Intern</h3>
         </div>
     
         <div class="card-body">
             <ul class="list-group">
-                <li class="list-group-item">Id: ${id}</li>
-                <li class="list-group-item">Email: ${email}</a></li>
-                <li class="list-group-item">School: ${school}</li>
+                <li class="list-group-item"><i class="fas fa-fingerprint mr-2"></i>Id: ${id}</li>
+                <li class="list-group-item"><i class="fas fa-envelope mr-2"></i>Email: <a href="mailto:${email}}">${email}</a></li>
+                <li class="list-group-item"><i class="fas fa-school mr-2"></i>School: ${school}</li>
             </ul>
         </div>
       </div>
@@ -96,12 +95,12 @@ module.exports = templateData => {
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 jumbotron mb-3 team-heading">
-                <h1 class="text-center">My Team</h1>
+                <h1 class="text-center">Team Profile Generator</h1>
             </div>
         </div>
     </div>
     <div class="container">
-    <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>Welcome to My Team</h3>
+    <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>Team Members</h3>
         <div class="row">
             <div class="team-area col-12 d-flex justify-content-center">
             ${generateTeam(templateData)}
