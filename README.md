@@ -1,6 +1,6 @@
 # Team-Profile-Generator
 The following image shows the generated HTML’s appearance and functionality.
-![Screenshot](images/Screenshot.....png)
+![Screenshot](dist/Screenshot.png)
 
 ## Description
 This code showcases a Node.js command-line application that takes in information about employees and generates an HTML webpage that displays summaries for each person in a software engineering team. It provides well-crafted testing for each part of the code and ensures that is passes all unit tests. The application is invoked by using the following command:
@@ -18,10 +18,10 @@ This code showcases a Node.js command-line application that takes in information
 * https://fontawesome.com/icons
  
 ## Web Access
-Click here for the [Team-Profile-Generator] access https://marynapr.github.io/Team-Profile-Generator/
+Click here for the access to Github [Team-Profile-Generator](https://marynapr.github.io/Team-Profile-Generator/)
 
 ## Video
-To see the video testing the functionality of Team-Profile-Generator please visit the following [link](https://)
+To see the video testing the functionality of Team-Profile-Generator please visit the following [link](https://drive.google.com/file/d/1J0eTQBbcH2K0yRM2jAjNC36iBlDR4zCL/view)
 
 ## Questions
 This document was created by MarynaPR. Feel free to contact me with any questions via email pryadkamaryna@gmail.com.
